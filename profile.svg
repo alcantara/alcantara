@@ -1,202 +1,344 @@
 <svg xmlns="http://www.w3.org/2000/svg"
-     width="1100" height="900"
-     viewBox="0 0 1100 900">
+     width="1000"
+     height="660"
+     viewBox="0 0 1000 660">
+
+  <title>Samuel Alcântara — Developer Workspace</title>
 
   <defs>
+    <pattern id="grid" width="32" height="32"
+             patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32"
+            fill="none"
+            stroke="#FFFFFF"
+            stroke-opacity=".025"/>
+    </pattern>
+
     <style>
-      .mono {
-        font-family: "Courier New", monospace;
+      text {
+        font-family: monospace;
+        letter-spacing: 1px;
       }
 
-      .white { fill: #e5e5e5; }
-      .gray { fill: #777; }
-      .dark { fill: #454545; }
+      .white { fill: #EAEAEA; }
+      .gray { fill: #858585; }
+      .dim { fill: #505050; }
 
-      .heading {
-        font-size: 32px;
-        fill: #eee;
-      }
-
-      .tab {
-        font-size: 23px;
-      }
-
-      .item {
-        font-size: 23px;
-        fill: #dedede;
-      }
-
-      .label {
-        font-size: 13px;
-        letter-spacing: 2px;
-        fill: #777;
-      }
-
-      .border {
-        stroke: #414141;
-        stroke-width: 1.5;
-        fill: none;
-      }
+      .small { font-size: 12px; }
+      .medium { font-size: 16px; }
+      .large { font-size: 23px; }
 
       .line {
-        stroke: #333;
+        stroke: #353535;
         stroke-width: 1;
       }
-    </style>
 
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="4"
-                      result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
+      .panel {
+        opacity: 0;
+      }
+
+      /* Overview */
+      #overview {
+        animation: overview 12s infinite;
+      }
+
+      /* Stack */
+      #stack {
+        animation: stack 12s infinite;
+      }
+
+      /* Projects */
+      #projects {
+        animation: projects 12s infinite;
+      }
+
+      @keyframes overview {
+        0%, 29% { opacity: 1; }
+        33%, 96% { opacity: 0; }
+        100% { opacity: 1; }
+      }
+
+      @keyframes stack {
+        0%, 32% { opacity: 0; }
+        36%, 62% { opacity: 1; }
+        66%, 100% { opacity: 0; }
+      }
+
+      @keyframes projects {
+        0%, 65% { opacity: 0; }
+        69%, 96% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+
+      /* Square navigation indicator */
+      .indicator {
+        animation: moveIndicator 12s infinite;
+      }
+
+      @keyframes moveIndicator {
+        0%, 29% {
+          transform: translateX(0);
+        }
+
+        33%, 62% {
+          transform: translateX(165px);
+        }
+
+        66%, 96% {
+          transform: translateX(330px);
+        }
+
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      .blink {
+        animation: blink 1.5s steps(2) infinite;
+      }
+
+      @keyframes blink {
+        50% { opacity: .2; }
+      }
+
+    </style>
   </defs>
 
-  <!-- Background -->
+  <!-- BACKGROUND -->
 
-  <rect width="1100" height="900" fill="#111"/>
+  <rect width="1000" height="660" fill="#101010"/>
+  <rect width="1000" height="660" fill="url(#grid)"/>
 
-  <!-- Grid -->
+  <!-- INTERFACE GUIDES -->
 
-  <path d="M120 0V900 M0 130H1100"
-        stroke="#292929" stroke-width="2"/>
+  <path d="M115 0V660 M0 115H1000"
+        stroke="#303030" fill="none"/>
 
-  <circle cx="120" cy="130" r="3"
-          fill="#eee" filter="url(#glow)"/>
+  <circle cx="115" cy="115" r="2.5"
+          fill="#EEEEEE"/>
 
-  <g class="mono">
+  <!-- HEADER -->
 
-    <!-- Header -->
+  <circle cx="165" cy="55" r="4"
+          fill="#EEEEEE" class="blink"/>
 
-    <text x="190" y="65" class="gray"
-          font-size="15">
-      github.com/alcantara
+  <text x="180" y="59" class="gray small">
+    ALCANTARA / PERSONAL WORKSPACE
+  </text>
+
+  <text x="920" y="59"
+        text-anchor="end" class="dim small">
+    GITHUB PROFILE
+  </text>
+
+  <path d="M155 85H920" class="line"/>
+
+  <!-- INTRODUCTION -->
+
+  <text x="155" y="155" class="white large">
+    Hello, I'm Samuel.
+  </text>
+
+  <text x="155" y="187" class="gray medium">
+    Computer Science Student
+  </text>
+
+  <text x="155" y="217" class="dim small">
+    SOFTWARE ENGINEERING / BACKEND / ARTIFICIAL INTELLIGENCE
+  </text>
+
+  <!-- NAVIGATION -->
+
+  <text x="155" y="280" class="white large">
+    Overview
+  </text>
+
+  <text x="320" y="280" class="gray large">
+    Stack
+  </text>
+
+  <text x="485" y="280" class="gray large">
+    Projects
+  </text>
+
+  <path d="M155 305H920" class="line"/>
+
+  <!-- ANIMATED SQUARE -->
+
+  <rect x="155" y="300"
+        width="10" height="10"
+        fill="#EEEEEE"
+        class="indicator"/>
+
+  <!-- ================================= -->
+  <!-- OVERVIEW PANEL -->
+  <!-- ================================= -->
+
+  <g id="overview" class="panel">
+
+    <text x="155" y="355" class="dim small">
+      01 / OVERVIEW
     </text>
 
-    <text x="190" y="215" class="heading">
+    <text x="155" y="405" class="white large">
       Samuel Alcântara
     </text>
 
-    <text x="192" y="255" class="gray"
-          font-size="20">
+    <text x="155" y="435" class="gray medium">
       Computer Science Student
     </text>
 
-    <text x="192" y="290" class="gray"
-          font-size="15">
-      SOFTWARE ENGINEERING / AI ENGINEERING
+    <text x="155" y="480" class="white medium">
+      Technical interests
     </text>
 
-    <!-- Main heading -->
-
-    <text x="190" y="385" class="white"
-          font-size="29">
-      My Stack
+    <text x="155" y="515" class="gray medium">
+      Backend Engineering
     </text>
 
-    <!-- Navigation -->
-
-    <text x="190" y="450"
-          class="tab white">
-      Languages
+    <text x="155" y="545" class="gray medium">
+      Artificial Intelligence
     </text>
 
-    <text x="375" y="450"
-          class="tab gray">
-      Backend
+    <text x="155" y="575" class="gray medium">
+      Software Architecture
     </text>
 
-    <text x="555" y="450"
-          class="tab gray">
-      Data
-    </text>
-
-    <text x="700" y="450"
-          class="tab gray">
-      AI
-    </text>
-
-    <path d="M190 480H1020" class="line"/>
-
-    <rect x="190" y="478"
-          width="105" height="4"
-          fill="#eee" filter="url(#glow)"/>
-
-    <!-- Languages -->
-
-    <text x="190" y="535" class="label">
-      01 / PROGRAMMING LANGUAGES
-    </text>
-
-    <rect x="190" y="555"
-          width="65" height="65" class="border"/>
-
-    <path d="M207 588L221 602L240 574"
-          stroke="#eee" stroke-width="2"
-          fill="none"/>
-
-    <text x="285" y="595" class="item">
-      TypeScript
-    </text>
-
-    <rect x="600" y="555"
-          width="65" height="65" class="border"/>
-
-    <path d="M617 588L631 602L650 574"
-          stroke="#eee" stroke-width="2"
-          fill="none"/>
-
-    <text x="695" y="595" class="item">
-      JavaScript
-    </text>
-
-    <rect x="190" y="645"
-          width="65" height="65" class="border"/>
-
-    <path d="M207 678L221 692L240 664"
-          stroke="#eee" stroke-width="2"
-          fill="none"/>
-
-    <text x="285" y="685" class="item">
-      Python
-    </text>
-
-    <rect x="600" y="645"
-          width="65" height="65" class="border"/>
-
-    <path d="M617 678L631 692L650 664"
-          stroke="#eee" stroke-width="2"
-          fill="none"/>
-
-    <text x="695" y="685" class="item">
-      SQL
-    </text>
-
-    <!-- Backend -->
-
-    <path d="M190 745H1020" class="line"/>
-
-    <text x="190" y="790" class="label">
-      02 / BACKEND & SYSTEMS
-    </text>
-
-    <text x="190" y="835" class="item">
-      Node.js
-    </text>
-
-    <text x="380" y="835" class="item">
-      Express
-    </text>
-
-    <text x="560" y="835" class="item">
-      Fastify
-    </text>
-
-    <text x="740" y="835" class="item">
-      FastAPI
+    <text x="155" y="605" class="gray medium">
+      Distributed Systems
     </text>
 
   </g>
+
+  <!-- ================================= -->
+  <!-- STACK PANEL -->
+  <!-- ================================= -->
+
+  <g id="stack" class="panel">
+
+    <text x="155" y="355" class="dim small">
+      02 / TECHNOLOGY STACK
+    </text>
+
+    <!-- Column 1 -->
+
+    <text x="155" y="405" class="white medium">
+      Languages
+    </text>
+
+    <text x="155" y="435" class="gray medium">
+      TypeScript
+    </text>
+
+    <text x="155" y="463" class="gray medium">
+      JavaScript
+    </text>
+
+    <text x="155" y="491" class="gray medium">
+      Python
+    </text>
+
+    <text x="155" y="519" class="gray medium">
+      Rust
+    </text>
+
+    <!-- Column 2 -->
+
+    <text x="420" y="405" class="white medium">
+      Backend
+    </text>
+
+    <text x="420" y="435" class="gray medium">
+      Node.js
+    </text>
+
+    <text x="420" y="463" class="gray medium">
+      Express
+    </text>
+
+    <text x="420" y="491" class="gray medium">
+      Fastify
+    </text>
+
+    <text x="420" y="519" class="gray medium">
+      FastAPI
+    </text>
+
+    <!-- Column 3 -->
+
+    <text x="680" y="405" class="white medium">
+      Infrastructure
+    </text>
+
+    <text x="680" y="435" class="gray medium">
+      PostgreSQL
+    </text>
+
+    <text x="680" y="463" class="gray medium">
+      Redis
+    </text>
+
+    <text x="680" y="491" class="gray medium">
+      Docker
+    </text>
+
+    <text x="680" y="519" class="gray medium">
+      Linux
+    </text>
+
+  </g>
+
+  <!-- ================================= -->
+  <!-- PROJECTS PANEL -->
+  <!-- ================================= -->
+
+  <g id="projects" class="panel">
+
+    <text x="155" y="355" class="dim small">
+      03 / SELECTED PROJECTS
+    </text>
+
+    <text x="155" y="405" class="white medium">
+      idempotency-service-api
+    </text>
+
+    <text x="155" y="430" class="gray small">
+      Python / FastAPI / PostgreSQL
+    </text>
+
+    <path d="M155 450H920" class="line"/>
+
+    <text x="155" y="485" class="white medium">
+      crm-api
+    </text>
+
+    <text x="155" y="510" class="gray small">
+      TypeScript / Backend API
+    </text>
+
+    <path d="M155 530H920" class="line"/>
+
+    <text x="155" y="565" class="white medium">
+      erp-api
+    </text>
+
+    <text x="155" y="590" class="gray small">
+      JavaScript / Node.js
+    </text>
+
+  </g>
+
+  <!-- FOOTER -->
+
+  <path d="M155 625H920" class="line"/>
+
+  <text x="155" y="648" class="dim small">
+    BUILDING / LEARNING / ENGINEERING
+  </text>
+
+  <text x="920" y="648"
+        text-anchor="end" class="gray small">
+    github.com/alcantara
+  </text>
+
 </svg>
