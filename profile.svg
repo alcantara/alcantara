@@ -1,75 +1,266 @@
 
 <svg xmlns="http://www.w3.org/2000/svg"
      width="100%"
-     viewBox="0 0 1200 620"
+     viewBox="0 0 1200 900"
      role="img"
-     aria-label="Samuel Alcântara — Animated Developer Chat">
+     aria-label="Samuel Alcântara — Animated developer profile">
 
-  <title>Samuel Alcântara — Developer Chat</title>
+  <title>Samuel Alcântara</title>
 
   <style>
     text {
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-weight: 400;
     }
 
     .white { fill: #e8e8e8; }
-    .gray { fill: #858585; }
-    .dim { fill: #515151; }
+    .gray { fill: #929292; }
+    .muted { fill: #575757; }
     .green { fill: #79dfbd; }
 
-    .small { font-size: 13px; }
-    .normal { font-size: 16px; }
-    .name { font-size: 21px; font-weight: 600; }
-    .label { font-size: 11px; letter-spacing: 1.5px; }
+    .normal { font-size: 19px; }
+    .small { font-size: 15px; }
+    .tiny { font-size: 12px; }
+    .name { font-size: 23px; font-weight: 600; }
 
-    .border {
-      fill: none;
-      stroke: #303030;
-      stroke-width: 1;
-    }
-
-    .message {
-      opacity: 0;
-      animation: message-in .65s ease forwards;
-    }
-
-    .m1 { animation-delay: .3s; }
-    .m2 { animation-delay: 1.1s; }
-    .m3 { animation-delay: 2.1s; }
-    .m4 { animation-delay: 2.9s; }
-    .m5 { animation-delay: 3.8s; }
-
-    .bubble-user {
-      fill: #151a19;
-      stroke: #29473d;
-      stroke-width: 1;
-    }
-
-    .bubble-response {
-      fill: #111316;
+    .divider {
       stroke: #292929;
       stroke-width: 1;
     }
 
-    .dot {
-      animation: typing 1.2s ease-in-out infinite;
+    .frame {
+      fill: #0a0a0a;
+      stroke: #414141;
+      stroke-width: 1.2;
     }
 
-    .dot:nth-child(2) { animation-delay: .2s; }
-    .dot:nth-child(3) { animation-delay: .4s; }
+    /* SYSTEM INITIALIZATION */
 
-    .cursor {
-      animation: blink 1s steps(2, start) infinite;
+    .boot-scene {
+      opacity: 0;
+      animation: boot-scene 3.9s ease .2s forwards;
     }
 
-    .online {
+    .boot-heading {
+      opacity: 0;
+      animation: appear .45s ease .2s forwards;
+    }
+
+    .boot-hex {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: boot-rotation 1.2s ease .25s both;
+    }
+
+    .boot-stage {
+      opacity: 0;
+      animation: boot-line .35s ease forwards;
+    }
+
+    .stage-1 { animation-delay: .65s; }
+    .stage-2 { animation-delay: 1.25s; }
+    .stage-3 { animation-delay: 1.85s; }
+
+    .boot-check {
+      opacity: 0;
+      animation: appear .3s ease forwards;
+    }
+
+    .check-1 { animation-delay: 1.05s; }
+    .check-2 { animation-delay: 1.65s; }
+    .check-3 { animation-delay: 2.25s; }
+
+    .progress-track {
+      opacity: 0;
+      animation: appear .3s ease .65s forwards;
+    }
+
+    .progress-fill {
+      transform-box: fill-box;
+      transform-origin: left center;
+      transform: scaleX(0);
+      animation: progress 1.8s cubic-bezier(.4,0,.2,1) .9s forwards;
+    }
+
+    .boot-ready {
+      opacity: 0;
+      animation: appear .45s ease 2.85s forwards;
+    }
+
+    .ready-dot {
+      animation: pulse .8s ease-in-out infinite;
+    }
+
+    /* CHAT COMPOSER */
+
+    .composer {
+      opacity: 0;
+      animation: appear .4s ease 3.85s forwards;
+    }
+
+    .input-text {
+      opacity: 1;
+      clip-path: inset(0 100% 0 0);
+    }
+
+    .command-one {
+      animation:
+        typewriter .7s steps(6,end) 4.25s forwards,
+        input-clear .15s ease 5s forwards;
+    }
+
+    .command-two {
+      animation:
+        typewriter 1s steps(22,end) 10.25s forwards,
+        input-clear .15s ease 11.35s forwards;
+    }
+
+    .command-three {
+      animation:
+        typewriter .75s steps(12,end) 15.75s forwards,
+        input-clear .15s ease 16.6s forwards;
+    }
+
+    /* BLOCK CURSOR */
+
+    .cursor-track {
+      opacity: 0;
+    }
+
+    .cursor-one {
+      animation:
+        cursor-visible .7s linear 4.25s forwards,
+        cursor-move-one .7s steps(6,end) 4.25s forwards;
+    }
+
+    .cursor-two {
+      animation:
+        cursor-visible 1s linear 10.25s forwards,
+        cursor-move-two 1s steps(22,end) 10.25s forwards;
+    }
+
+    .cursor-three {
+      animation:
+        cursor-visible .75s linear 15.75s forwards,
+        cursor-move-three .75s steps(12,end) 15.75s forwards;
+    }
+
+    .block {
+      fill: #79dfbd;
+      animation: blink .85s steps(2,start) infinite;
+    }
+
+    /* ENTER */
+
+    .enter-key {
+      opacity: 0;
+    }
+
+    .enter-one { animation: enter-press .4s ease 4.95s both; }
+    .enter-two { animation: enter-press .4s ease 11.3s both; }
+    .enter-three { animation: enter-press .4s ease 16.55s both; }
+
+    /* USER MESSAGES */
+
+    .user-message {
+      opacity: 0;
+      animation: appear .4s ease forwards;
+    }
+
+    .user-one { animation-delay: 5.3s; }
+    .user-two { animation-delay: 11.65s; }
+    .user-three { animation-delay: 16.9s; }
+
+    /* THINKING */
+
+    .thinking {
+      opacity: 0;
+      animation: thinking 1.3s ease forwards;
+    }
+
+    .thinking-one { animation-delay: 5.75s; }
+    .thinking-two { animation-delay: 12.1s; }
+    .thinking-three { animation-delay: 17.35s; }
+
+    .thinking-hex {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    /* ASSISTANT RESPONSES */
+
+    .response {
+      opacity: 0;
+      animation: appear .4s ease forwards;
+    }
+
+    .response-one { animation-delay: 7.1s; }
+    .response-two { animation-delay: 13.45s; }
+    .response-three { animation-delay: 18.7s; }
+
+    .typed {
+      clip-path: inset(0 100% 0 0);
+    }
+
+    .r-name {
+      animation: typewriter .7s steps(17,end) 7.35s both;
+    }
+
+    .r-role {
+      animation: typewriter 1.05s steps(48,end) 8.1s both;
+    }
+
+    .r-description {
+      animation: typewriter .95s steps(42,end) 9.25s both;
+    }
+
+    .r-project-one {
+      animation: typewriter .95s steps(41,end) 13.7s both;
+    }
+
+    .r-project-two {
+      animation: typewriter 1s steps(44,end) 14.75s both;
+    }
+
+    .r-languages {
+      animation: typewriter .95s steps(39,end) 18.95s both;
+    }
+
+    .r-backend {
+      animation: typewriter .95s steps(35,end) 19.95s both;
+    }
+
+    .r-database {
+      animation: typewriter .55s steps(17,end) 20.95s both;
+    }
+
+    .placeholder {
+      opacity: 0;
+      animation: appear .5s ease 22.3s forwards;
+    }
+
+    .footer {
+      opacity: 0;
+      animation: appear .5s ease 22s forwards;
+    }
+
+    .status {
       animation: pulse 2s ease-in-out infinite;
     }
 
-    @keyframes message-in {
+    /* KEYFRAMES */
+
+    @keyframes boot-scene {
+      0% { opacity: 0; }
+      8%, 78% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes appear {
       from {
         opacity: 0;
-        transform: translateY(12px);
+        transform: translateY(6px);
       }
       to {
         opacity: 1;
@@ -77,139 +268,301 @@
       }
     }
 
-    @keyframes typing {
-      0%, 60%, 100% { opacity: .3; transform: translateY(0); }
-      30% { opacity: 1; transform: translateY(-4px); }
+    @keyframes boot-line {
+      from {
+        opacity: 0;
+        transform: translateX(-8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
 
-    @keyframes blink {
-      50% { opacity: 0; }
+    @keyframes boot-rotation {
+      0% { transform: rotate(-90deg) scale(.5); }
+      65% { transform: rotate(280deg) scale(1.1); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+
+    @keyframes progress {
+      to { transform: scaleX(1); }
+    }
+
+    @keyframes typewriter {
+      from { clip-path: inset(0 100% 0 0); }
+      to { clip-path: inset(0 0 0 0); }
+    }
+
+    @keyframes input-clear {
+      to { opacity: 0; }
+    }
+
+    @keyframes cursor-visible {
+      0% { opacity: 0; }
+      5%, 90% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes cursor-move-one {
+      from { transform: translateX(0); }
+      to { transform: translateX(54px); }
+    }
+
+    @keyframes cursor-move-two {
+      from { transform: translateX(0); }
+      to { transform: translateX(198px); }
+    }
+
+    @keyframes cursor-move-three {
+      from { transform: translateX(0); }
+      to { transform: translateX(108px); }
+    }
+
+    @keyframes enter-press {
+      0% {
+        opacity: 0;
+        transform: translateY(2px);
+      }
+      25% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      65% {
+        opacity: 1;
+        transform: translateY(-2px);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-6px);
+      }
+    }
+
+    @keyframes thinking {
+      0% { opacity: 0; }
+      12%, 85% { opacity: 1; }
+      100% { opacity: 0; }
     }
 
     @keyframes pulse {
       50% { opacity: .35; }
     }
 
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
-      .message, .dot, .cursor, .online {
-        animation: none;
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-delay: 0ms !important;
+      }
+
+      .boot-scene, .thinking { opacity: 0; }
+
+      .composer, .user-message, .response, .footer {
         opacity: 1;
+      }
+
+      .typed, .input-text {
+        clip-path: none;
       }
     }
   </style>
 
-  <!-- Background -->
-  <rect width="1200" height="620" fill="#0b0d10"/>
+  <!-- BACKGROUND -->
+  <rect width="1200" height="900" fill="#080808"/>
 
-  <!-- Chat window -->
-  <rect x="75" y="45" width="1050" height="530"
-        rx="7" class="border"/>
+  <!-- HEADER -->
+  <circle cx="130" cy="49" r="4" class="green status"/>
 
-  <!-- Header -->
-  <g>
-    <circle cx="108" cy="80" r="4" fill="#79dfbd" class="online"/>
-
-    <text x="124" y="85" class="white normal">
-      samuel@workspace
-    </text>
-
-    <text x="1090" y="83" text-anchor="end"
-          class="dim label">
-      DEVELOPER SESSION
-    </text>
-
-    <line x1="75" y1="108" x2="1125" y2="108"
-          class="border"/>
-  </g>
-
-  <!-- Message 1: User -->
-  <g class="message m1">
-    <rect x="690" y="139" width="385" height="49"
-          rx="5" class="bubble-user"/>
-
-    <text x="713" y="169" class="green normal">
-      whoami --profile
-    </text>
-
-    <text x="1088" y="169" class="dim small">↵</text>
-  </g>
-
-  <!-- Message 2: Profile -->
-  <g class="message m2">
-    <polygon points="113,229 121,234 121,244 113,249 105,244 105,234"
-             class="green"/>
-
-    <text x="139" y="237" class="dim label">
-      PROFILE
-    </text>
-
-    <rect x="135" y="251" width="660" height="82"
-          rx="5" class="bubble-response"/>
-
-    <text x="159" y="282" class="white name">
-      Samuel Alcântara
-    </text>
-
-    <text x="159" y="310" class="gray normal">
-      Computer Science Student · AI Engineer
-    </text>
-  </g>
-
-  <!-- Message 3: User -->
-  <g class="message m3">
-    <rect x="765" y="359" width="310" height="49"
-          rx="5" class="bubble-user"/>
-
-    <text x="788" y="389" class="green normal">
-      stack --list
-    </text>
-
-    <text x="1088" y="389" class="dim small">↵</text>
-  </g>
-
-  <!-- Message 4: Stack -->
-  <g class="message m4">
-    <polygon points="113,448 121,453 121,463 113,468 105,463 105,453"
-             class="green"/>
-
-    <text x="139" y="456" class="dim label">
-      TECHNICAL STACK
-    </text>
-
-    <rect x="135" y="471" width="730" height="72"
-          rx="5" class="bubble-response"/>
-
-    <text x="159" y="500" class="white normal">
-      TypeScript · JavaScript · Python · Rust
-    </text>
-
-    <text x="159" y="525" class="gray normal">
-      FastAPI · Express · Fastify · PostgreSQL
-    </text>
-  </g>
-
-  <!-- Typing indicator -->
-  <g class="message m5">
-    <text x="135" y="562" class="dim small">
-      Samuel is building
-    </text>
-
-    <circle cx="284" cy="557" r="3" fill="#79dfbd" class="dot"/>
-    <circle cx="297" cy="557" r="3" fill="#79dfbd" class="dot"/>
-    <circle cx="310" cy="557" r="3" fill="#79dfbd" class="dot"/>
-  </g>
-
-  <!-- Bottom status -->
-  <line x1="75" y1="595" x2="1125" y2="595"
-        class="border"/>
-
-  <text x="100" y="612" class="dim label">
-    GITHUB.COM/ALCANTARA
+  <text x="147" y="54" class="gray small">
+    samuel@github
   </text>
 
-  <text x="1100" y="612" text-anchor="end" class="green label">
-    <tspan class="cursor">_</tspan>
-    ONLINE
+  <text x="1075" y="54" text-anchor="end" class="muted tiny">
+    PROFILE / SESSION 001
   </text>
+
+  <line x1="125" y1="78" x2="1100" y2="78" class="divider"/>
+
+  <!-- SYSTEM INITIALIZATION -->
+  <g class="boot-scene">
+
+    <g class="boot-heading">
+      <polygon points="142,105 151,110 151,120 142,125 133,120 133,110"
+               fill="none" stroke="#79dfbd"
+               stroke-width="1.6" class="boot-hex"/>
+
+      <text x="173" y="121" class="white normal">
+        INITIALIZING SYSTEM
+      </text>
+
+      <text x="173" y="144" class="muted tiny">
+        SAMUEL / ENGINEERING WORKSPACE
+      </text>
+    </g>
+
+    <g class="boot-stage stage-1">
+      <text x="173" y="184" class="gray small">Loading runtime environment</text>
+    </g>
+
+    <g class="boot-check check-1">
+      <text x="620" y="184" class="green small">OK</text>
+    </g>
+
+    <g class="boot-stage stage-2">
+      <text x="173" y="215" class="gray small">Checking system components</text>
+    </g>
+
+    <g class="boot-check check-2">
+      <text x="620" y="215" class="green small">OK</text>
+    </g>
+
+    <g class="boot-stage stage-3">
+      <text x="173" y="246" class="gray small">Mounting developer workspace</text>
+    </g>
+
+    <g class="boot-check check-3">
+      <text x="620" y="246" class="green small">OK</text>
+    </g>
+
+    <g class="progress-track">
+      <rect x="173" y="270" width="470" height="3" fill="#242424"/>
+      <rect x="173" y="270" width="470" height="3"
+            fill="#79dfbd" class="progress-fill"/>
+    </g>
+
+    <g class="boot-ready">
+      <circle cx="178" cy="301" r="4" fill="#79dfbd" class="ready-dot"/>
+      <text x="192" y="306" class="green tiny">SYSTEM READY</text>
+      <text x="643" y="306" text-anchor="end" class="muted tiny">100%</text>
+    </g>
+
+  </g>
+
+  <!-- USER 01 -->
+  <g class="user-message user-one">
+    <text x="142" y="164" class="green normal">›</text>
+    <text x="173" y="164" class="white normal">whoami</text>
+  </g>
+
+  <!-- THINKING 01 -->
+  <g class="thinking thinking-one">
+    <polygon points="142,201 151,206 151,216 142,221 133,216 133,206"
+             fill="#79dfbd" class="thinking-hex"/>
+    <text x="173" y="218" class="white normal">Thinking...</text>
+  </g>
+
+  <!-- RESPONSE 01 -->
+  <g class="response response-one">
+    <polygon points="142,245 151,250 151,260 142,265 133,260 133,250"
+             class="green"/>
+
+    <text x="173" y="261" class="white name typed r-name">Samuel Alcântara</text>
+    <text x="173" y="298" class="gray small typed r-role">Computer Science Student · Early-career AI Engineer</text>
+    <text x="173" y="334" class="muted small typed r-description">Building software and exploring intelligent systems.</text>
+  </g>
+
+  <!-- USER 02 -->
+  <g class="user-message user-two">
+    <text x="142" y="393" class="green normal">›</text>
+    <text x="173" y="393" class="white normal">what are you building?</text>
+  </g>
+
+  <!-- THINKING 02 -->
+  <g class="thinking thinking-two">
+    <polygon points="142,429 151,434 151,444 142,449 133,444 133,434"
+             fill="#79dfbd" class="thinking-hex"/>
+    <text x="173" y="446" class="white normal">Thinking...</text>
+  </g>
+
+  <!-- RESPONSE 02 -->
+  <g class="response response-two">
+    <polygon points="142,474 151,479 151,489 142,494 133,489 133,479"
+             class="green"/>
+
+    <text x="173" y="490" class="white small typed r-project-one">Developing backend APIs and practical software systems.</text>
+    <text x="173" y="526" class="gray small typed r-project-two">Exploring AI engineering and software architecture.</text>
+  </g>
+
+  <!-- USER 03 -->
+  <g class="user-message user-three">
+    <text x="142" y="585" class="green normal">›</text>
+    <text x="173" y="585" class="white normal">stack --list</text>
+  </g>
+
+  <!-- THINKING 03 -->
+  <g class="thinking thinking-three">
+    <polygon points="142,621 151,626 151,636 142,641 133,636 133,626"
+             fill="#79dfbd" class="thinking-hex"/>
+    <text x="173" y="638" class="white normal">Thinking...</text>
+  </g>
+
+  <!-- RESPONSE 03 -->
+  <g class="response response-three">
+    <polygon points="142,666 151,671 151,681 142,686 133,681 133,671"
+             class="green"/>
+
+    <text x="173" y="682" class="white small typed r-languages">TypeScript · JavaScript · Python · Rust</text>
+    <text x="173" y="718" class="gray small typed r-backend">FastAPI · Flask · Express · Fastify</text>
+    <text x="173" y="754" class="gray small typed r-database">SQL · PostgreSQL</text>
+  </g>
+
+  <!-- CHAT COMPOSER -->
+  <g class="composer">
+
+    <rect x="125" y="810" width="975" height="56"
+          rx="3" class="frame"/>
+
+    <text x="151" y="845" class="green normal">›</text>
+
+    <!-- Typed input -->
+    <text x="181" y="845" class="white small input-text command-one">whoami</text>
+    <text x="181" y="845" class="white small input-text command-two">what are you building?</text>
+    <text x="181" y="845" class="white small input-text command-three">stack --list</text>
+
+    <!-- Block cursors -->
+    <g class="cursor-track cursor-one">
+      <rect x="181" y="826" width="9" height="23" class="block"/>
+    </g>
+
+    <g class="cursor-track cursor-two">
+      <rect x="181" y="826" width="9" height="23" class="block"/>
+    </g>
+
+    <g class="cursor-track cursor-three">
+      <rect x="181" y="826" width="9" height="23" class="block"/>
+    </g>
+
+    <!-- Enter key -->
+    <g class="enter-key enter-one">
+      <text x="1065" y="845" text-anchor="middle" class="green normal">↵</text>
+    </g>
+
+    <g class="enter-key enter-two">
+      <text x="1065" y="845" text-anchor="middle" class="green normal">↵</text>
+    </g>
+
+    <g class="enter-key enter-three">
+      <text x="1065" y="845" text-anchor="middle" class="green normal">↵</text>
+    </g>
+
+    <!-- Idle placeholder -->
+    <text x="181" y="845" class="muted small placeholder">
+      always building something...
+    </text>
+
+  </g>
+
+  <!-- FOOTER -->
+  <g class="footer">
+    <text x="125" y="891" class="muted tiny">github.com/alcantara</text>
+
+    <text x="1100" y="891" text-anchor="end" class="green tiny">
+      <tspan class="status">●</tspan>
+      <tspan dx="7">BUILDING</tspan>
+    </text>
+  </g>
 
 </svg>
