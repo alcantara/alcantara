@@ -8,10 +8,6 @@
   <title>Samuel Alcântara | Developer Profile</title>
 
   <style><![CDATA[
-    /* =====================================
-       01. BASE & TYPOGRAPHY
-    ===================================== */
-
     text {
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
       font-weight: 400;
@@ -29,7 +25,7 @@
 
     .name {
       font-family: Inter, "Segoe UI", Arial, sans-serif;
-      font-size: 23px;
+      font-size: 20px;
       font-weight: 650;
       letter-spacing: -.35px;
     }
@@ -51,9 +47,7 @@
       stroke-width: 1.2;
     }
 
-    /* =====================================
-       02. BOOT SEQUENCE
-    ===================================== */
+    /* BOOT SEQUENCE */
 
     .boot {
       opacity: 0;
@@ -110,9 +104,7 @@
       animation: pulse 1.4s ease-in-out infinite;
     }
 
-    /* =====================================
-       03. COMPOSER & INPUT
-    ===================================== */
+    /* COMPOSER & INPUT */
 
     .composer {
       opacity: 0;
@@ -185,9 +177,7 @@
     .enter-one { animation: enter-press .3s ease 5.43s both; }
     .enter-two { animation: enter-press .3s ease 11.18s both; }
 
-    /* =====================================
-       04. USER MESSAGES
-    ===================================== */
+    /* USER MESSAGES */
 
     .user {
       opacity: 0;
@@ -197,9 +187,7 @@
     .user-one { animation-delay: 5.62s; }
     .user-two { animation-delay: 11.38s; }
 
-    /* =====================================
-       05. THINKING STATE
-    ===================================== */
+    /* THINKING STATE */
 
     .thinking {
       opacity: 0;
@@ -216,9 +204,7 @@
       animation: hex-pulse 1.2s ease-in-out infinite;
     }
 
-    /* =====================================
-       06. COMPLETED RESPONSE MARKERS
-    ===================================== */
+    /* COMPLETED RESPONSE MARKERS */
 
     .answered-hex {
       fill: #777777;
@@ -229,9 +215,7 @@
     .marker-one { animation-delay: 7.03s; }
     .marker-two { animation-delay: 12.79s; }
 
-    /* =====================================
-       07. RESPONSE CONTENT
-    ===================================== */
+    /* RESPONSE CONTENT */
 
     .typed {
       clip-path: inset(0 100% 0 0);
@@ -270,9 +254,7 @@
       animation: typewriter .48s steps(16,end) 14.84s both;
     }
 
-    /* =====================================
-       08. FOOTER
-    ===================================== */
+    /* FOOTER */
 
     .footer {
       opacity: 0;
@@ -283,9 +265,7 @@
       animation: pulse 2s ease-in-out infinite;
     }
 
-    /* =====================================
-       09. KEYFRAMES
-    ===================================== */
+    /* KEYFRAMES */
 
     @keyframes boot-exit {
       0% { opacity: 0; }
@@ -394,9 +374,7 @@
       50% { opacity: 0; }
     }
 
-    /* =====================================
-       10. REDUCED MOTION
-    ===================================== */
+    /* REDUCED MOTION */
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -513,8 +491,6 @@
       Building software and exploring intelligent systems.
     </text>
   </g>
-
-  <line x1="180" y1="313" x2="1075" y2="313" class="divider"/>
 
   <!-- CONVERSATION 02 — TECH STACK -->
 
