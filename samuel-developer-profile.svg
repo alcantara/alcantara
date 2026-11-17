@@ -19,8 +19,8 @@
     .muted  { fill: #646464; }
     .green  { fill: #79dfbd; }
 
-    .normal { font-size: 17px; }
-    .small  { font-size: 15px; }
+    .normal { font-size: 15px; }
+    .small  { font-size: 13px; }
     .tiny   { font-size: 12px; }
 
     .name {
@@ -42,7 +42,7 @@
     }
 
     .frame {
-      fill: #0a0a0a;
+      fill: #0D1117;
       stroke: #414141;
       stroke-width: 1.2;
     }
@@ -414,7 +414,7 @@
 
   <!-- CANVAS & HEADER -->
 
-  <rect width="1200" height="675" fill="#080808"/>
+  <rect width="1200" height="675" fill="#0D1117"/>
 
   <circle cx="130" cy="42" r="4" class="green status"/>
 
