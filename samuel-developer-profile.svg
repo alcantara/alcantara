@@ -1,0 +1,665 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100%"
+     viewBox="0 0 1200 675"
+     role="img"
+     aria-label="Samuel Alcântara — Animated Developer Profile">
+
+  <title>Samuel Alcântara | Developer Profile</title>
+
+  <style><![CDATA[
+    /* =====================================
+       01. TYPOGRAPHY & BASE
+    ===================================== */
+
+    text {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-weight: 400;
+      text-rendering: geometricPrecision;
+    }
+
+    .white  { fill: #e8e8e8; }
+    .gray   { fill: #999999; }
+    .muted  { fill: #646464; }
+    .green  { fill: #79dfbd; }
+
+    .normal { font-size: 17px; }
+    .small  { font-size: 15px; }
+    .tiny   { font-size: 12px; }
+
+    .name {
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      font-size: 23px;
+      font-weight: 650;
+      letter-spacing: -.35px;
+    }
+
+    .label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.3px;
+    }
+
+    .divider {
+      stroke: #292929;
+      stroke-width: 1;
+    }
+
+    .frame {
+      fill: #0a0a0a;
+      stroke: #414141;
+      stroke-width: 1.2;
+    }
+
+    /* =====================================
+       02. INITIALIZATION
+    ===================================== */
+
+    .boot {
+      opacity: 0;
+      animation: boot-exit 3.65s ease .15s forwards;
+    }
+
+    .boot-heading {
+      opacity: 0;
+      animation: fade-up .4s ease .3s forwards;
+    }
+
+    .boot-icon {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: boot-rotate .9s ease .35s both;
+    }
+
+    .boot-line {
+      opacity: 0;
+      animation: line-in .35s ease forwards;
+    }
+
+    .boot-line.one   { animation-delay: .75s; }
+    .boot-line.two   { animation-delay: 1.3s; }
+    .boot-line.three { animation-delay: 1.85s; }
+
+    .boot-check {
+      opacity: 1;
+      transform: translateY(0);
+      animation: boot-check-in .28s ease both;
+    }
+
+    .check-one   { animation-delay: 1.14s; }
+    .check-two   { animation-delay: 1.69s; }
+    .check-three { animation-delay: 2.24s; }
+
+    .progress-track {
+      opacity: 0;
+      animation: fade-up .3s ease .75s forwards;
+    }
+
+    .progress-fill {
+      transform-box: fill-box;
+      transform-origin: left center;
+      transform: scaleX(0);
+      animation: progress 1.65s cubic-bezier(.4,0,.2,1) .95s forwards;
+    }
+
+    .boot-ready {
+      opacity: 0;
+      animation: fade-up .35s ease 2.7s forwards;
+    }
+
+    .ready-dot {
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+
+    /* =====================================
+       03. COMPOSER & TYPING
+    ===================================== */
+
+    .composer {
+      opacity: 0;
+      animation: fade-up .4s ease 3.85s forwards;
+    }
+
+    .input-text {
+      clip-path: inset(0 100% 0 0);
+    }
+
+    .command-one {
+      animation:
+        typewriter .65s steps(6,end) 4.15s forwards,
+        clear-input .12s ease 4.95s forwards;
+    }
+
+    .command-two {
+      animation:
+        typewriter .8s steps(12,end) 10s forwards,
+        clear-input .12s ease 10.92s forwards;
+    }
+
+    .hint-start {
+      opacity: 0;
+      animation: hint-start .35s ease 3.95s both;
+    }
+
+    .hint-between {
+      opacity: 0;
+      animation: hint-between 4.65s ease 5.15s both;
+    }
+
+    .hint-end {
+      opacity: 0;
+      animation: fade-up .4s ease 15.5s forwards;
+    }
+
+    .cursor {
+      opacity: 0;
+    }
+
+    .cursor-one {
+      animation:
+        cursor-visible .65s linear 4.15s forwards,
+        cursor-move-one .65s steps(6,end) 4.15s forwards;
+    }
+
+    .cursor-two {
+      animation:
+        cursor-visible .8s linear 10s forwards,
+        cursor-move-two .8s steps(12,end) 10s forwards;
+    }
+
+    .block {
+      fill: #79dfbd;
+      animation: blink .85s steps(2,start) infinite;
+    }
+
+    .idle-cursor {
+      opacity: 0;
+      animation:
+        fade-up .3s ease 15.7s forwards,
+        blink .85s steps(2,start) 15.7s infinite;
+    }
+
+    .enter {
+      opacity: 0;
+    }
+
+    .enter-one {
+      animation: enter-press .35s ease 4.95s both;
+    }
+
+    .enter-two {
+      animation: enter-press .35s ease 10.92s both;
+    }
+
+    /* =====================================
+       04. USER MESSAGES
+    ===================================== */
+
+    .user {
+      opacity: 0;
+      animation: message-in .35s ease forwards;
+    }
+
+    .user-one { animation-delay: 5.15s; }
+    .user-two { animation-delay: 11.12s; }
+
+    /* =====================================
+       05. THINKING INDICATORS
+    ===================================== */
+
+    .thinking {
+      opacity: 0;
+      animation: thinking-cycle 1.15s ease forwards;
+    }
+
+    .thinking-one { animation-delay: 5.48s; }
+    .thinking-two { animation-delay: 11.45s; }
+
+    .thinking-icon {
+      fill: #79dfbd;
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: hex-pulse 1.3s ease-in-out infinite;
+    }
+
+    /* =====================================
+       06. COMPLETED RESPONSE MARKERS
+    ===================================== */
+
+    .answered-hex {
+      fill: #777777;
+      opacity: 0;
+      animation: marker-in .3s ease forwards;
+    }
+
+    .marker-one { animation-delay: 6.7s; }
+    .marker-two { animation-delay: 12.65s; }
+
+    /* =====================================
+       07. RESPONSE CONTENT
+    ===================================== */
+
+    .typed {
+      clip-path: none;
+    }
+
+    .r-name {
+      animation: typewriter .65s steps(17,end) 6.95s both;
+    }
+
+    .r-role {
+      animation: typewriter 1s steps(48,end) 7.65s both;
+    }
+
+    .r-description {
+      animation: typewriter .9s steps(43,end) 8.75s both;
+    }
+
+    .stack-label {
+      opacity: 1;
+      transform: translateY(0);
+      animation: stack-label-in .24s ease both;
+    }
+
+    .languages-label { animation-delay: 12.88s; }
+    .backend-label   { animation-delay: 13.78s; }
+    .database-label  { animation-delay: 14.68s; }
+
+    .r-languages {
+      animation:
+        typewriter .8s steps(39,end) 12.98s both,
+        stack-value-in .24s ease 12.98s both;
+    }
+
+    .r-backend {
+      animation:
+        typewriter .8s steps(35,end) 13.88s both,
+        stack-value-in .24s ease 13.88s both;
+    }
+
+    .r-database {
+      animation:
+        typewriter .5s steps(16,end) 14.78s both,
+        stack-value-in .24s ease 14.78s both;
+    }
+
+    /* =====================================
+       08. FOOTER
+    ===================================== */
+
+    .footer {
+      opacity: 0;
+      animation: fade-up .4s ease 15.7s forwards;
+    }
+
+    .status {
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    /* =====================================
+       09. KEYFRAMES
+    ===================================== */
+
+    @keyframes boot-exit {
+      0% { opacity: 0; }
+      8%, 76% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes fade-up {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes message-in {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes line-in {
+      from {
+        opacity: 0;
+        transform: translateX(-7px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes boot-check-in {
+      from {
+        opacity: 0;
+        transform: translateY(3px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes stack-label-in {
+      from {
+        opacity: 0;
+        transform: translateY(3px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes stack-value-in {
+      from {
+        opacity: 0;
+        transform: translateY(3px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes boot-rotate {
+      from { transform: rotate(-90deg) scale(.6); }
+      to   { transform: rotate(270deg) scale(1); }
+    }
+
+    @keyframes progress {
+      to { transform: scaleX(1); }
+    }
+
+    @keyframes typewriter {
+      from { clip-path: inset(0 100% 0 0); }
+      to   { clip-path: inset(0 0 0 0); }
+    }
+
+    @keyframes clear-input {
+      to { opacity: 0; }
+    }
+
+    @keyframes cursor-visible {
+      0% { opacity: 0; }
+      5%, 88% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes cursor-move-one {
+      from { transform: translateX(0); }
+      to   { transform: translateX(54px); }
+    }
+
+    @keyframes cursor-move-two {
+      from { transform: translateX(0); }
+      to   { transform: translateX(108px); }
+    }
+
+    @keyframes enter-press {
+      0% {
+        opacity: 0;
+        transform: translateY(2px);
+      }
+      25% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      65% {
+        opacity: 1;
+        transform: translateY(-2px);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-5px);
+      }
+    }
+
+    @keyframes thinking-cycle {
+      0% { opacity: 0; }
+      12%, 88% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes hex-pulse {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: .5;
+        transform: scale(.94);
+      }
+    }
+
+    @keyframes marker-in {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes hint-start {
+      0% { opacity: 0; }
+      25%, 75% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes hint-between {
+      0% { opacity: 0; }
+      5%, 95% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes pulse {
+      50% { opacity: .4; }
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    /* =====================================
+       10. REDUCED MOTION
+    ===================================== */
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-delay: 0ms !important;
+      }
+
+      .boot,
+      .thinking {
+        opacity: 0;
+      }
+
+      .composer,
+      .user,
+      .answered-hex,
+      .boot-check,
+      .stack-label,
+      .footer {
+        opacity: 1;
+      }
+
+      .typed,
+      .input-text {
+        clip-path: none;
+      }
+
+      .cursor,
+      .enter,
+      .hint-start,
+      .hint-between {
+        display: none;
+      }
+
+      .hint-end {
+        opacity: 1;
+      }
+    }
+  ]]></style>
+
+  <!-- CANVAS & HEADER -->
+  <rect width="1200" height="675" fill="#080808"/>
+
+  <circle cx="130" cy="42" r="4" class="green status"/>
+
+  <text x="150" y="49" class="gray small">samuel@github</text>
+
+  <text x="1075" y="49" text-anchor="end" class="muted tiny">
+    DEVELOPER PROFILE
+  </text>
+
+  <!-- Consistent content grid: x=125 to x=1075 (950px) -->
+  <line x1="125" y1="77" x2="1075" y2="77" class="divider"/>
+
+  <!-- INITIALIZATION -->
+  <g class="boot">
+    <g class="boot-heading">
+      <polygon points="142,96 151,101 151,111 142,116 133,111 133,101"
+               fill="none" stroke="#79dfbd" stroke-width="1.5"
+               class="boot-icon"/>
+
+      <text x="178" y="114" class="white normal">INITIALIZING SYSTEM</text>
+      <text x="178" y="140" class="muted tiny">SAMUEL / ENGINEERING WORKSPACE</text>
+    </g>
+
+    <g class="boot-line one">
+      <text x="178" y="179" class="gray small">Loading runtime environment</text>
+    </g>
+    <text x="673" y="179" text-anchor="end" class="green tiny boot-check check-one">OK</text>
+
+    <g class="boot-line two">
+      <text x="178" y="211" class="gray small">Checking system components</text>
+    </g>
+    <text x="673" y="211" text-anchor="end" class="green tiny boot-check check-two">OK</text>
+
+    <g class="boot-line three">
+      <text x="178" y="243" class="gray small">Mounting developer workspace</text>
+    </g>
+    <text x="673" y="243" text-anchor="end" class="green tiny boot-check check-three">OK</text>
+
+    <g class="progress-track">
+      <rect x="178" y="268" width="495" height="4" fill="#242424"/>
+      <rect x="178" y="268" width="495" height="4"
+            fill="#79dfbd" class="progress-fill"/>
+    </g>
+
+    <g class="boot-ready">
+      <circle cx="183" cy="299" r="4" fill="#79dfbd"/>
+      <text x="198" y="304" class="green tiny">SYSTEM READY</text>
+      <text x="673" y="304" text-anchor="end" class="muted tiny">100%</text>
+    </g>
+  </g>
+
+  <!-- CONVERSATION 01 — IDENTITY -->
+  <g class="user user-one">
+    <text x="142" y="139" class="green normal">›</text>
+    <text x="178" y="139" class="white normal">whoami</text>
+  </g>
+
+  <g class="thinking thinking-one">
+    <polygon points="142,180 149,184 149,192 142,196 135,192 135,184"
+             class="thinking-icon"/>
+    <text x="178" y="196" class="gray normal">Thinking...</text>
+  </g>
+
+  <polygon points="142,222 149,226 149,234 142,238 135,234 135,226"
+           class="answered-hex marker-one"/>
+
+  <g>
+    <text x="178" y="236" class="white name typed r-name">Samuel Alcântara</text>
+    <text x="178" y="274" class="gray small typed r-role">
+      Computer Science Student · Early-career AI Engineer
+    </text>
+    <text x="178" y="310" class="muted small typed r-description">
+      Building software and exploring intelligent systems.
+    </text>
+  </g>
+
+  <!-- CONVERSATION 02 — TECH STACK -->
+  <g class="user user-two">
+    <text x="142" y="381" class="green normal">›</text>
+    <text x="178" y="381" class="white normal">stack --list</text>
+  </g>
+
+  <g class="thinking thinking-two">
+    <polygon points="142,422 149,426 149,434 142,438 135,434 135,426"
+             class="thinking-icon"/>
+    <text x="178" y="438" class="gray normal">Thinking...</text>
+  </g>
+
+  <polygon points="142,464 149,468 149,476 142,480 135,476 135,468"
+           class="answered-hex marker-two"/>
+
+  <g>
+    <text x="178" y="478" class="muted label stack-label languages-label">LANGUAGES</text>
+    <text x="305" y="478" class="white small typed r-languages">
+      TypeScript · JavaScript · Python · Rust
+    </text>
+
+    <text x="178" y="512" class="muted label stack-label backend-label">BACKEND</text>
+    <text x="305" y="512" class="gray small typed r-backend">
+      FastAPI · Flask · Express · Fastify
+    </text>
+
+    <text x="178" y="546" class="muted label stack-label database-label">DATABASE</text>
+    <text x="305" y="546" class="gray small typed r-database">
+      SQL · PostgreSQL
+    </text>
+  </g>
+
+  <!-- CHAT COMPOSER -->
+  <g class="composer">
+    <rect x="125" y="584" width="950" height="58" rx="3" class="frame"/>
+
+    <text x="151" y="621" class="green normal">›</text>
+
+    <text x="178" y="621" class="muted small hint-start">type a command...</text>
+    <text x="178" y="621" class="muted small hint-between">waiting for input...</text>
+    <text x="178" y="621" class="white small input-text command-one">whoami</text>
+    <text x="178" y="621" class="white small input-text command-two">stack --list</text>
+
+    <g class="cursor cursor-one">
+      <rect x="178" y="599" width="9" height="27" class="block"/>
+    </g>
+
+    <g class="cursor cursor-two">
+      <rect x="178" y="599" width="9" height="27" class="block"/>
+    </g>
+
+    <g class="enter enter-one">
+      <text x="1045" y="621" text-anchor="middle" class="green normal">↵</text>
+    </g>
+
+    <g class="enter enter-two">
+      <text x="1045" y="621" text-anchor="middle" class="green normal">↵</text>
+    </g>
+
+    <text x="178" y="621" class="muted small hint-end">
+      always building something...
+    </text>
+
+    <rect x="430" y="603" width="9" height="24" class="green idle-cursor"/>
+  </g>
+
+  <!-- FOOTER -->
+  <g class="footer">
+    <text x="125" y="665" class="muted tiny">github.com/alcantara</text>
+
+    <text x="1075" y="665" text-anchor="end" class="green tiny">
+      <tspan class="status">●</tspan>
+      <tspan dx="8">BUILDING</tspan>
+    </text>
+  </g>
+
+</svg>
